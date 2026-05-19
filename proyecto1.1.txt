@@ -28,6 +28,12 @@ def imprimir_opciones(lista_archivos):
 def cargar_senal(nombre_archivo):
     senal = np.load(nombre_archivo)
     return senal.tolist()
+
+def maximo(datos_senal):
+    for i in range(len(datos_senal)):
+        maxim = datos_senal[i > i+1]
+        
+
 #calcular mediana
 def calcular_mediana(datos_senal):
     resultados = []
@@ -35,6 +41,7 @@ def calcular_mediana(datos_senal):
         ventana = datos_senal[i:i+7]
         resultados.append(np.median(ventana))
     return resultados
+
 #calcular media
 def calcular_media(datos_senal):
     resultados = []
@@ -42,6 +49,7 @@ def calcular_media(datos_senal):
         ventana = datos_senal[i:i+7]
         resultados.append(np.mean(ventana))
     return resultados
+
 archivos_encontrados = buscar_archivos()
 archivo_elegido = imprimir_opciones(archivos_encontrados)
 datos_senal = cargar_senal(archivo_elegido)
@@ -78,7 +86,9 @@ plt.subplots_adjust(bottom= 0.2)
 
 linea, = ax.plot(datos_senal, label="Señal Original")
 
-texto_box = ax.text(0.05, 0.95, "Señal: Original", transform=ax.transAxes)
+"""texto_box = ax.text(0.05, 0.95, "Señal: Original", transform=ax.transAxes)"""
+
+
 ax.set_title("Gráfico Señal")
 ax.grid(True)
 ax.legend()
