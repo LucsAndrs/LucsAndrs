@@ -29,11 +29,6 @@ def cargar_senal(nombre_archivo):
     senal = np.load(nombre_archivo)
     return senal.tolist()
 
-def maximo(datos_senal):
-    for i in range(len(datos_senal)):
-        maxim = datos_senal[i > i+1]
-        
-
 #calcular mediana
 def calcular_mediana(datos_senal):
     resultados = []
@@ -55,6 +50,16 @@ archivo_elegido = imprimir_opciones(archivos_encontrados)
 datos_senal = cargar_senal(archivo_elegido)
 datos_mediana = calcular_mediana(datos_senal)
 datos_media = calcular_media(datos_senal)
+
+def estadisticas(event):
+    np.max(datos_senal)
+    np.min(datos_senal)
+    np.mean(datos_senal)
+    plt.show(np.std(datos_senal))
+    print(f"el promedio es: {np.mean(datos_senal)}")
+    print(f"el maximo es : {np.max(datos_senal)}")
+    print(f"el minimo es: {np.min(datos_senal)}")
+    print(f"la desv es : {np.std(datos_senal)}")
 
 def senal_original(event):
     linea.set_ydata(datos_senal)    
@@ -103,14 +108,18 @@ print("¡Preparando ventana del gráfico!")
 ax_btn1 = plt.axes([0.4, 0.02, 0.2, 0.07])
 ax_btn2 = plt.axes([0.65, 0.02, 0.2, 0.07])
 ax_btn3 = plt.axes([0.15, 0.02, 0.2, 0.07])
+ax_btn4 = plt.axes([0.05, 0.005, 0.2, 0.07])
+
 
 btn_mediana = Button(ax_btn1, "Mediana móvil")
 btn_media = Button(ax_btn2, "Media móvil")
 btn_original = Button(ax_btn3, "Señal original")
+btn_estadisticas = Button(ax_btn4, "Estadísticas")
 
 btn_mediana.on_clicked(mostrar_mediana)
 btn_media.on_clicked(mostrar_media)
 btn_original.on_clicked(senal_original)
+btn_estadisticas.on_clicked(estadisticas)
 texto_box = ax.text(
         0.02,
         0.95,
